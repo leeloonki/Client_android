@@ -2,6 +2,7 @@ package com.example.tool.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -77,14 +78,11 @@ public class MainActivity extends AppCompatActivity {
     private void Signin() {
         input_username = edt_username.getText().toString().trim();
         input_passwd = edt_passwd.getText().toString().trim();
-//        Log.d("INPUT_USERNAME", input_username);
-//        Log.d("INPUT_PASSWD", input_passwd);
         if (input_username.length() == 0 || input_passwd.length() == 0) {
             Toast.makeText(MainActivity.this, "请输入账号或密码", Toast.LENGTH_LONG).show();
             return;
         }
         sendRequestWithOkHttp();
-
     }
 
     private void Signup() {
@@ -126,9 +124,23 @@ public class MainActivity extends AppCompatActivity {
 
         Gson gson = new Gson();
         java.lang.reflect.Type type = new TypeToken<LoginResp>() {}.getType();
-        LoginResp loginResp = gson.fromJson(jsonData, type);
-//        String jsonInString = gson.toJson(loginResp);
-//        System.out.println(jsonInString);
-
+        final LoginResp loginResp = gson.fromJson(jsonData, type);
+        String jsonInString = gson.toJson(loginResp);
+        System.out.println(jsonInString);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if(loginResp.respCode.respCode_code==200){
+                    Toast.makeText(MainActivity.this,"登陆成功",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this,UserActivity.class);
+                    startActivity(intent);
+                }else if(loginResp.respCode.respCode_code==300){
+                    Toast.makeText(MainActivity.this,"密码错误",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(MainActivity.this,"账号不存在",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
+
 }
