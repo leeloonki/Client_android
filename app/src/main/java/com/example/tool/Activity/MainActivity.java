@@ -2,9 +2,11 @@ package com.example.tool.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected RadioButton rdio_remember;
     protected Button btn_signin, btn_signup;
 
+    private MyDBHelper myDBHelper;
     protected String input_username = "", input_passwd = "";
     public static final String URL = "http://10.8.254.205:8081/proj";
 
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        myDBHelper = new MyDBHelper(this,"db_user.db",null,1);
         initView();
         setView();
     }
@@ -56,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         MyClickListener onclick = new MyClickListener();
         btn_signin.setOnClickListener(onclick);
         btn_signup.setOnClickListener(onclick);
+
     }
 
     public class MyClickListener implements View.OnClickListener {
@@ -82,11 +87,29 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "请输入账号或密码", Toast.LENGTH_LONG).show();
             return;
         }
+
+//        查询本地数据库
+        SQLiteDatabase db = myDBHelper.getWritableDatabase();
+        System.out.println("********************************************************************");
+        String SQL = " select * from tb_user where username ='" + input_username + "';";
+        System.out.println(SQL);
+        Cursor cursor = db.rawQuery(SQL, null);
+        String sql_password;
+        while(cursor.moveToNext()){
+            sql_password = cursor.getString(2);//获取第二列的值
+            if (input_passwd==sql_password){
+                cursor.close();
+                db.close();
+                Jmp();
+                return;
+            }
+        }
         sendRequestWithOkHttp();
     }
 
     private void Signup() {
-
+        Intent intent = new Intent(MainActivity.this,SignUp.class);
+        startActivity(intent);
     }
 
     private void sendRequestWithOkHttp() {
@@ -132,6 +155,16 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 if(loginResp.respCode.respCode_code==200){
                     Toast.makeText(MainActivity.this,"登陆成功",Toast.LENGTH_SHORT).show();
+                    if(rdio_remember.isChecked()){
+                        if(rdio_remember.isChecked()){
+                            SQLiteDatabase db = myDBHelper.getWritableDatabase();
+                            ContentValues values = new ContentValues();
+                            values.put("username",input_username);
+                            values.put("password",input_passwd);
+                            db.insert("tb_user",null,values);
+                            System.out.println("数据已存入数据库");
+                        }
+                    }
                     Intent intent = new Intent(MainActivity.this,UserActivity.class);
                     startActivity(intent);
                 }else if(loginResp.respCode.respCode_code==300){
@@ -141,6 +174,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void Jmp(){
+        Toast.makeText(MainActivity.this,"登陆成功",Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainActivity.this,UserActivity.class);
+        startActivity(intent);
     }
 
 }
