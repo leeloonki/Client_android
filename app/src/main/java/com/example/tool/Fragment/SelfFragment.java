@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.tool.Activity.MainActivity;
 import com.example.tool.Activity.UserActivity;
 import com.example.tool.R;
 import com.example.tool.Utils.Utils;
@@ -18,7 +19,7 @@ import com.example.tool.Utils.Utils;
 public class SelfFragment extends Fragment {
 
 
-    Button btn_modify,btn_cancel;
+    Button btn_modify,btn_cancel,btn_exit;
     TextView txt_username,txt_email,txt_gender;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,8 @@ public class SelfFragment extends Fragment {
 
         btn_cancel = view.findViewById(R.id.self_btn_cancel);
         btn_modify = view.findViewById(R.id.self_btn_modifyinfo);
+        btn_exit = view.findViewById(R.id.self_btn_exit);
+
         txt_username = view.findViewById(R.id.frag_self_username);
         txt_email = view.findViewById(R.id.frag_self_email);
         txt_gender = view.findViewById(R.id.frag_self_gender);
@@ -63,6 +66,14 @@ public class SelfFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), UserActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), MainActivity.class);
                 startActivity(intent);
             }
         });

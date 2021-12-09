@@ -124,6 +124,16 @@
             android:layout_gravity="end|bottom"
             android:layout_weight="1"
             android:layout_margin="10dp"/>
+
+        <Button
+            android:id="@+id/self_btn_exit"
+            android:text="退出"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_selector"
+            android:layout_gravity="end|bottom"
+            android:layout_weight="1"
+            android:layout_margin="10dp"/>
     </LinearLayout>
 
 

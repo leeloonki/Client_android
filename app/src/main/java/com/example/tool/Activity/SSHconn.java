@@ -128,7 +128,7 @@ public class SSHconn extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String cmd = edt_inputcmd.getText().toString();
+                final String cmd = edt_inputcmd.getText().toString();
                 System.out.println(cmd);
                 cmds.command=cmd;
                 Shell shell = new Shell(host.host, host.username, host.password);
@@ -142,7 +142,7 @@ public class SSHconn extends AppCompatActivity {
                     @Override
                     public void run() {
                         // 一、获取当前系统时间和日期并格式化输出:
-                        histroy = histroy + "\n"+ dateTime + "\n"+ execLog;
+                        histroy =histroy + "\n"+ dateTime + "\n" + ">" + cmd +"\n"+ execLog;
                         conninfo.setText(histroy);
 //                        System.out.println("*****************"+cmds.toString());
                         Toast.makeText(SSHconn.this,"执行成功!",Toast.LENGTH_SHORT).show();
