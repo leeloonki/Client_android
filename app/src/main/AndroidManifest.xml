@@ -4,6 +4,10 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+<!--    文件读写权限-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.SignUp"></activity>
+        <activity android:name=".Activity.SSHconn"></activity>
+        <activity android:name=".Activity.AddedHost" />
+        <activity android:name=".Activity.AddHostActivity" />
+        <activity android:name=".Activity.SignUpActivity" />
         <activity android:name=".Activity.UserActivity" />
         <activity android:name=".Activity.MainActivity">
             <intent-filter>

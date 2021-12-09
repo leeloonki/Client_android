@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.tool.Bean.LoginResp;
 import com.example.tool.R;
+import com.example.tool.Utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -24,9 +25,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static com.example.tool.Activity.MainActivity.URL;
 
-public class SignUp extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     private Button btn_signup,btn_ret;
     private EditText edt_username,edt_password,edt_email;
@@ -86,7 +86,7 @@ public class SignUp extends AppCompatActivity {
         sendRequestWithOkHttp();
     }
     private void Ret(){
-        Intent intent = new Intent(SignUp.this,MainActivity.class);
+        Intent intent = new Intent(SignUpActivity.this,MainActivity.class);
         startActivity(intent);
     }
 
@@ -111,7 +111,7 @@ public class SignUp extends AppCompatActivity {
                     OkHttpClient client = new OkHttpClient();
                     okhttp3.Request request = new Request.Builder()
                             // 指定访问的服务器地址
-                            .url(URL + "/user/signup").post(Request)
+                            .url(Utils.URL + "/user/signup").post(Request)
                             .build();
                     Response response = client.newCall(request).execute();
                     String responseData = response.body().string();
@@ -133,11 +133,11 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void run() {
                 if(loginResp.respCode.respCode_code==200){
-                    Toast.makeText(SignUp.this,"注册成功",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(SignUp.this,MainActivity.class);
+                    Toast.makeText(SignUpActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(SignUpActivity.this,MainActivity.class);
                     startActivity(intent);
                 }else{
-                    Toast.makeText(SignUp.this,"用户名已存在",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignUpActivity.this,"用户名已存在",Toast.LENGTH_SHORT).show();
                 }
             }
         });

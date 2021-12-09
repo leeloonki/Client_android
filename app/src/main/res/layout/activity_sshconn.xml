@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".Activity.SSHconn">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="已选连接主机信息："
+            android:textSize="20dp"/>
+        <TextView
+            android:text=""
+            android:id="@+id/sshconn_txt_hostinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/sshconn_txt_sshinfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10dp">
+        </TextView>
+
+    </LinearLayout>
+<!--    console-->
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/sshconn_txt_conninfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text=""/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+    android:id="@+id/sshconn_edt_cmd"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:gravity="center"
+    android:hint="input shell cmds here" />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:text="连接"
+                android:id="@+id/sshconn_btn_conn"
+                android:layout_width="wrap_content"
+                android:layout_alignParentBottom ="true"
+                android:background="@drawable/btn_selector"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+            </Button>
+            <Button
+                android:text="执行"
+                android:id="@+id/sshconn_btn_exec"
+                android:layout_width="wrap_content"
+                android:layout_alignParentBottom ="true"
+                android:background="@drawable/btn_selector"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+            </Button>
+            <Button
+                android:text="返回"
+                android:id="@+id/sshconn_btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_alignParentBottom ="true"
+                android:background="@drawable/btn_selector"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
+            </Button>
+
+        <Button
+            android:text="清空"
+            android:id="@+id/sshconn_btn_clear"
+            android:layout_width="wrap_content"
+            android:layout_alignParentBottom ="true"
+            android:background="@drawable/btn_selector"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+        </Button>
+
+        </LinearLayout>
+
+</LinearLayout>
+
+
+

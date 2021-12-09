@@ -2,10 +2,7 @@ package com.example.tool.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +11,10 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.tool.Bean.LoginResp;
+import com.example.tool.Bean.Result;
+import com.example.tool.Bean.User;
 import com.example.tool.R;
+import com.example.tool.Utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -34,16 +34,15 @@ public class MainActivity extends AppCompatActivity {
     protected RadioButton rdio_remember;
     protected Button btn_signin, btn_signup;
 
-    private MyDBHelper myDBHelper;
+//    private MyDBHelper myDBHelper;
     protected String input_username = "", input_passwd = "";
-    public static final String URL = "http://10.8.254.205:8081/proj";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        myDBHelper = new MyDBHelper(this,"db_user.db",null,1);
+//        myDBHelper = new MyDBHelper(this,"db_user.db",null,1);
         initView();
         setView();
     }
@@ -88,27 +87,27 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-//        查询本地数据库
-        SQLiteDatabase db = myDBHelper.getWritableDatabase();
-        System.out.println("********************************************************************");
-        String SQL = " select * from tb_user where username ='" + input_username + "';";
-        System.out.println(SQL);
-        Cursor cursor = db.rawQuery(SQL, null);
-        String sql_password;
-        while(cursor.moveToNext()){
-            sql_password = cursor.getString(2);//获取第二列的值
-            if (input_passwd==sql_password){
-                cursor.close();
-                db.close();
-                Jmp();
-                return;
-            }
-        }
+////        查询本地数据库
+//        SQLiteDatabase db = myDBHelper.getWritableDatabase();
+//        System.out.println("********************************************************************");
+//        String SQL = " select * from tb_user where username ='" + input_username + "';";
+//        System.out.println(SQL);
+//        Cursor cursor = db.rawQuery(SQL, null);
+//        String sql_password;
+//        while(cursor.moveToNext()){
+//            sql_password = cursor.getString(2);//获取第二列的值
+//            if (input_passwd==sql_password){
+//                cursor.close();
+//                db.close();
+//                Jmp();
+//                return;
+//            }
+//        }
         sendRequestWithOkHttp();
     }
 
     private void Signup() {
-        Intent intent = new Intent(MainActivity.this,SignUp.class);
+        Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
         startActivity(intent);
     }
 
@@ -131,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
                             // 指定访问的服务器地址
-                            .url(URL + "/user/signin").post(Request)
+                            .url(Utils.URL + "/user/signin").post(Request)
                             .build();
                     Response response = client.newCall(request).execute();
                     String responseData = response.body().string();
@@ -146,40 +145,36 @@ public class MainActivity extends AppCompatActivity {
     private void parseJSONWithJSONObject(String jsonData) {
 
         Gson gson = new Gson();
-        java.lang.reflect.Type type = new TypeToken<LoginResp>() {}.getType();
-        final LoginResp loginResp = gson.fromJson(jsonData, type);
-        String jsonInString = gson.toJson(loginResp);
+        java.lang.reflect.Type type = new TypeToken<Result<User>>() {}.getType();
+        final Result<User> userResult = gson.fromJson(jsonData, type);
+        Utils.user=userResult.data;
+        System.out.println(Utils.user.toString());
+        String jsonInString = gson.toJson(userResult);
         System.out.println(jsonInString);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                if(loginResp.respCode.respCode_code==200){
+                if(userResult.respCode.respCode_code==200){
                     Toast.makeText(MainActivity.this,"登陆成功",Toast.LENGTH_SHORT).show();
                     if(rdio_remember.isChecked()){
-                        if(rdio_remember.isChecked()){
-                            SQLiteDatabase db = myDBHelper.getWritableDatabase();
-                            ContentValues values = new ContentValues();
-                            values.put("username",input_username);
-                            values.put("password",input_passwd);
-                            db.insert("tb_user",null,values);
-                            System.out.println("数据已存入数据库");
-                        }
+//                        if(rdio_remember.isChecked()){
+//                            SQLiteDatabase db = myDBHelper.getWritableDatabase();
+//                            ContentValues values = new ContentValues();
+//                            values.put("username",input_username);
+//                            values.put("password",input_passwd);
+//                            db.insert("tb_user",null,values);
+//                            System.out.println("数据已存入数据库");
+//                        }
                     }
                     Intent intent = new Intent(MainActivity.this,UserActivity.class);
                     startActivity(intent);
-                }else if(loginResp.respCode.respCode_code==300){
+                }else if(userResult.respCode.respCode_code==300){
                     Toast.makeText(MainActivity.this,"密码错误",Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(MainActivity.this,"账号不存在",Toast.LENGTH_SHORT).show();
                 }
             }
         });
-    }
-
-    private void Jmp(){
-        Toast.makeText(MainActivity.this,"登陆成功",Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(MainActivity.this,UserActivity.class);
-        startActivity(intent);
     }
 
 }

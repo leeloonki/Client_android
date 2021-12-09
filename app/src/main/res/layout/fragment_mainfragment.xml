@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.Mainfragment">
+
+    <TextView
+        android:layout_margin="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:text="SERVER"/>
+
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/main_btn_addedhost"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_selector"
+            android:layout_gravity="bottom"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:text="查看所有" />
+
+        <Button
+            android:id="@+id/main_btn_addhost"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/btn_selector"
+            android:layout_gravity="end|bottom"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:text="添加连接"/>
+    </LinearLayout>
+
+</FrameLayout>
