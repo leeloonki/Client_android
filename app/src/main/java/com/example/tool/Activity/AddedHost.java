@@ -1,16 +1,9 @@
 package com.example.tool.Activity;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Point;
-import android.graphics.PostProcessor;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -54,8 +47,6 @@ public class AddedHost extends AppCompatActivity {
 
         listView = findViewById(R.id.addedhost_listview_host);
         sendRequestWithOkHttp();
-
-
 
 //        为item点击事件绑定
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -151,8 +142,6 @@ public class AddedHost extends AppCompatActivity {
         Gson gson = new Gson();
         java.lang.reflect.Type type = new TypeToken<Result<List<Host>>>() {}.getType();
         final Result<List<Host>> hostResult = gson.fromJson(jsonData, type);
-        String jsonInString = gson.toJson(hostResult);
-//        System.out.println("list<host> = "+ jsonInString);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

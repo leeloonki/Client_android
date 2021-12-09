@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.example.tool.Bean.LoginResp;
 import com.example.tool.Bean.Result;
 import com.example.tool.Bean.User;
 import com.example.tool.R;

@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.tool.Activity.AddHostActivity;
-import com.example.tool.Activity.AddedHost;
 import com.example.tool.Activity.UserActivity;
 import com.example.tool.R;
 import com.example.tool.Utils.Utils;

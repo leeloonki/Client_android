@@ -22,7 +22,6 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
@@ -157,6 +156,7 @@ public class SSHconn extends AppCompatActivity {
     private void cancel(){
         Intent intent = new Intent(SSHconn.this,AddedHost.class);
         startActivity(intent);
+        finish();
     }
 
     private void clear(){

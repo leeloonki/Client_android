@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.example.tool.Bean.LoginResp;
 import com.example.tool.Bean.RespCode;
 import com.example.tool.R;
 import com.example.tool.Utils.Utils;
@@ -67,7 +65,7 @@ public class AddHostActivity extends AppCompatActivity {
 
     private void addhost(){
         host = edt_host.getText().toString().trim();
-        port = Integer.parseInt(edt_password.getText().toString().trim());
+        port = Integer.parseInt(edt_port.getText().toString().trim());
         username =edt_username.getText().toString().trim();
         password =edt_password.getText().toString().trim();
         sendRequestWithOkHttp();
