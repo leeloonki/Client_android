@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         java.lang.reflect.Type type = new TypeToken<Result<User>>() {}.getType();
         final Result<User> userResult = gson.fromJson(jsonData, type);
         Utils.user=userResult.data;
-        System.out.println(Utils.user.toString());
+//        System.out.println(Utils.user.toString());
         String jsonInString = gson.toJson(userResult);
         System.out.println(jsonInString);
         runOnUiThread(new Runnable() {

@@ -15,14 +15,6 @@ public class Shell {
     private int port = 22;
     private int timeout = 60 * 60 * 1000;
 
-    public Shell(String host, String username, String password, int port, int timeout) {
-        this.host = host;
-        this.username = username;
-        this.password = password;
-        this.port = port;
-        this.timeout = timeout;
-    }
-
     public Shell(String host, String username, String password) {
         this.host = host;
         this.username = username;

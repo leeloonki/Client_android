@@ -115,9 +115,15 @@ public class SSHconn extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        System.out.println(execLog);
-                        sshinfo.setText(execLog);
-                        Toast.makeText(SSHconn.this,"连接成功!",Toast.LENGTH_SHORT).show();
+                        if(execLog.length()!=0){
+                            System.out.println(execLog);
+                            sshinfo.setText(execLog);
+                            Toast.makeText(SSHconn.this,"连接成功!",Toast.LENGTH_SHORT).show();
+                        }else{
+                            sshinfo.setText("主机连接失败");
+                            Toast.makeText(SSHconn.this,"连接失败!",Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                 });
             }
