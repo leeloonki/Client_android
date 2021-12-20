@@ -151,7 +151,7 @@ public class AddedHost extends AppCompatActivity {
                     for(Host host:AllHost){
 //                        HostList.add(host.toString());
                         i++;
-                        HostList.add("----------------------"+"记录" + "["+i+"]" +"----------------------"+ "\n"+ "主机："+ host.host+"\n"+ "端口："+ host.port+"\n"+ "账号："+ host.username+"\n"+ "密码："+ host.password );
+                        HostList.add("---"+"记录" + "["+i+"]" +"---"+ "\n"+ "主机："+ host.host+"\n"+ "端口："+ host.port+"\n"+ "账号："+ host.username+"\n"+ "密码："+ host.password );
                         adapter = new ArrayAdapter<String>(AddedHost.this, android.R.layout. simple_list_item_1, HostList);
                         //6将适配器和布局管理器加载到控件当中
                         listView.setAdapter(adapter);

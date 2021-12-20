@@ -91,7 +91,7 @@ public class HistoryCmds extends AppCompatActivity {
                     for(Cmds cmds:AllCmds){
 //                        cmdsList.add(cmds.toString());
                         i++;
-                        cmdsList.add("----------------------"+"记录" + "["+i+"]" +"----------------------"+ "\n"+ "主机："+ cmds.host+"\n"+"命令："+cmds.command+ "\n"+"执行时间："+cmds.cmdtime);
+                        cmdsList.add("---"+"记录" + "["+i+"]" +"---"+ "\n"+ "主机："+ cmds.host+"\n"+"命令："+cmds.command+ "\n"+"执行时间："+cmds.cmdtime);
                         adapter = new ArrayAdapter<String>(HistoryCmds.this, android.R.layout. simple_list_item_1, cmdsList);
                         //6将适配器和布局管理器加载到控件当中
                         listView.setAdapter(adapter);
